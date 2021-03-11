@@ -8,7 +8,7 @@ import java.util.Scanner;
 
 public class BasedeDatosFurbo {
     static final String JDBC_DRIVER = "org.mariadb.jdbc.Driver";
-    static final String DB_URL = "jdbc:mariadb://127.0.0.1:3306/db";
+    static final String DB_URL = "jdbc:mariadb://127.0.0.1:3306/futbol";
 
     static final String USER = "root";
     static final String PASS = "";
@@ -19,8 +19,8 @@ public class BasedeDatosFurbo {
         try {
             Class.forName(JDBC_DRIVER);
             System.out.println("Connecting to a selected database...");
-            conn = DriverManager.getConnection(
-                    DB_URL, USER, PASS);
+            conn = DriverManager.getConnection(DB_URL, USER, PASS);
+            stmt = conn.createStatement();
             System.out.println("Connected database successfully...");
             String sql = "CREATE TABLE resultados "
                     + "(EquipoLocal VARCHAR(100), "
@@ -28,7 +28,7 @@ public class BasedeDatosFurbo {
                     + " Resultado VARCHAR(10), "
                     + " Arbitro VARCHAR(100), "
                     + "Hora DATE ";
-            Objects.requireNonNull(stmt).executeUpdate(sql);
+            stmt.executeUpdate(sql);
 
 
         } catch (SQLException se) {
